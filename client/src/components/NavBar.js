@@ -18,4 +18,11 @@ class NavBar extends React.Component {
   }
 }
 
+// export class ConnectedNavBar extends React.Component {
+//   render(){
+//     return(
+
+//     )
+// }
+
 export default withRouter(NavBar)
