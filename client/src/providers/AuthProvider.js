@@ -48,7 +48,7 @@ export class AuthProvider extends Component {
         handleLogout: this.handleLogout,
         setUser: (user) => this.setState({ user })
       }}>
-      this.props.children
+      {this.props.children}
       </AuthContext.Provider>
     )
   }
