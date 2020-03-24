@@ -26,7 +26,7 @@ class Register extends Component {
   
 
   return (
-    <Segment>
+    <Segment style={style.segment}>
       <Header as="h1" textAlign="center">
         Register
       </Header>
@@ -82,5 +82,12 @@ export default class ConnectedRegister extends Component {
         {auth => <Register {...this.props} auth={auth}/>}
       </AuthConsumer>
     )
+  }
+}
+
+const style ={
+  segment: {
+    margin: '5% 20%',
+    
   }
 }

@@ -1,52 +1,63 @@
 import React from 'react'
-import { Header, Card, Image, Button, Icon} from 'semantic-ui-react'
+import { Header, Image, Input, Segment, Card } from 'semantic-ui-react'
 import { AuthConsumer } from '../providers/AuthProvider'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Axios from 'axios'
 
 class Home extends React.Component {
-  state = { posts: []}
+  state = { posts: [] }
 
   componentDidMount() {
-    Axios.get('api/posts').then(res => this.setState({ posts: res.data}))
+    Axios.get('api/posts').then(res => this.setState({ posts: res.data })).catch(e=>console.log(e))
   }
 
-  posts = () => {
+  allPosts = () => {
     const { posts } = this.state
-    console.log(this.state.posts);
-    posts.map((p, index) =>(
-      <Card key={index}>
-        <Card.Content>
-          <Card.Header>{p.body}</Card.Header>
-        </Card.Content>
-        <Card.Meta>by: {this.props.nickname}</Card.Meta>
-        <Card.Content>Replies go here</Card.Content>
-      </Card>
-    ))
-    return posts
-      
+    var postStuff = null
+    console.log(posts);
+    if (posts.length > 0) {
+      posts.map((p, index) => {
+        return(
+            postStuff = <p>{p.body}</p>
+        )
+      })
     }
-  
-  render(){
-  const { auth: { user } } = this.props
-  const posts = this.posts()
-  return (
-    <>
-      <Header as="h1" textAlign="center">
-        MyZone
-      </Header>
-      <Header as="h1">
-        <Image size="mini" src={require("./images/photo.png")} />
-        {user.nickname}
-      </Header>
-      <div>
-        <br />
-        <Header as="h2">My Feed</Header>
-        <br />
-         {this.posts()}
-      </div>
-    </>
-  );}
+    else {
+      return(
+       postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
+      )
+    }
+    return(postStuff)
+  }
+
+  render() {
+    return (
+      <>
+        <Segment>
+          <Header as='h1'>Create A Post</Header>
+          <Header as='h3'>
+            <Image
+              size='mini'
+              circular
+              src={require('./images/photo.png')}
+              style={style.image}
+            />
+            <Input
+              placeholder='Write Your Post Here'
+              style={style.inputBox}
+            >
+            </Input>
+          </Header>
+        </Segment>
+        <Segment>
+        {this.allPosts()}
+        </Segment>
+
+
+
+      </>
+    )
+  }
 }
 
 const ConnectedHome = (props) => {
@@ -57,6 +68,22 @@ const ConnectedHome = (props) => {
       }
     </AuthConsumer>
   )
+}
+
+const style = {
+  inputBox: {
+    padding: '0px',
+    width: '85%'
+  },
+  segments: {
+    backgroundColor: 'white',
+    margin: '.5% 2.5%',
+    width: '95%',
+  },
+  image: {
+    width: '6%',
+    margin: '2%'
+  }
 }
 
 export default ConnectedHome

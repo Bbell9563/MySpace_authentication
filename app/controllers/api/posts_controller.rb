@@ -3,7 +3,7 @@
 class Api::PostsController < ApplicationController
   before_action :authenticate_user!
   def index
-    render json: User.all_posts(current_user.liked_posts)
+    render json: Post.all
   end
 
   def update

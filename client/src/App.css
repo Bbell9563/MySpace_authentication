@@ -43,3 +43,8 @@
   font-family: 'Oswald', sans-serif;
   src:url("https://fonts.googleapis.com/css?family=Oswald&display=swap");
 }
+
+html{
+  font-family: 'Oswald', sans-serif;
+  background-color: #999;
+}
