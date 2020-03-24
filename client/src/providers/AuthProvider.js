@@ -29,9 +29,6 @@ export class AuthProvider extends Component {
   }
 
   handleLogout = history => {
-    console.log(history)
-    console.log(this.state.user)
-    console.log('handlelogout hit')
     axios
       .delete("/api/auth/sign_out")
       .then(res => {
@@ -43,20 +40,6 @@ export class AuthProvider extends Component {
         console.log(res);
       });
   }
-
-
-  //   handleLogout = history => {
-  //   axios
-  //     .delete("/api/auth/sign_out")
-  //     .then(res => {
-  //       this.setState({ user: null });
-  //       history.push("/");
-  //     })
-  //     .catch(res => {
-  //       console.log(res);
-  //     });
-  // };
-
 
   render() {
     return (

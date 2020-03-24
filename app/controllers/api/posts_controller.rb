@@ -2,7 +2,7 @@
 
 class Api::PostsController < ApplicationController
   def index
-    render json: User.all_posts(current_user.liked_posts)
+    render json: Post.all
   end
 
   def update

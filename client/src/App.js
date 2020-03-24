@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom'
-import { Container, Segment } from 'semantic-ui-react';
+import { Container} from 'semantic-ui-react';
 import Home from './components/Home'
 import NoMatch from './components/NoMatch'
 import NavBar from './components/NavBar'
