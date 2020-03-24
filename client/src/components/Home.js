@@ -1,8 +1,39 @@
 import React from 'react'
-import { Header, Image, Input, Segment, Placeholder } from 'semantic-ui-react'
+import { Header, Image, Input, Segment, Card } from 'semantic-ui-react'
 import { AuthConsumer } from '../providers/AuthProvider'
+import { Link } from 'react-router-dom'
+import Axios from 'axios'
 
 class Home extends React.Component {
+  state = { posts: [] }
+
+  componentDidMount() {
+    Axios.get('api/posts').then(res => this.setState({ posts: res.data }))
+  }
+
+  allPosts = () => {
+    const { posts } = this.state
+    console.log(posts);
+    if (posts.length > 1) {
+      posts.map((p, index) => {
+        return (
+          <Card key={index}>
+            <Card.Content>
+              <Card.Header>{p.body}</Card.Header>
+            </Card.Content>
+            <Card.Meta>by: {this.props.nickname}</Card.Meta>
+            <Card.Content>Replies go here</Card.Content>
+          </Card>
+        )
+      })
+    }
+    else {
+      return(
+      <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
+      )
+    }
+  }
+
   render() {
     const { auth: { user } } = this.props
     return (
@@ -24,9 +55,7 @@ class Home extends React.Component {
           </Header>
         </Segment>
         <Segment>
-          <Header as='h3' textAlign='center'>
-            No Post Have Been Made
-          </Header>
+          {this.allPosts()}
         </Segment>
       </>
     )
