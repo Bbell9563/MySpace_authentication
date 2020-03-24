@@ -8,6 +8,14 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  has_many :posts
-  has_many :replies
+  serialize :liked_posts, Array
+
+  def self.all_posts(ids)
+    ids = ids.empty? ? [0] : ids
+  end
+
+  def self.liked(ids)
+    ids = ids.empty? ? [0] : ids
+    Post.where('id IN (?)', ids)
+  end
 end
