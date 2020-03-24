@@ -1,25 +1,39 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, } from 'semantic-ui-react'
+import { Menu, Input, Icon, Image } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
 
 class Navbar extends React.Component {
-  
+
   rightNavItems = () => {
     const { auth: { user, handleLogout, }, location, } = this.props;
-    
+
     if (user) {
       return (
-        <Menu.Menu position='right'>
-          <Menu.Item
-            name='logout'
-            onClick={ () => handleLogout(this.props.history) }
-          />
-        </Menu.Menu>
+        <>
+          <Link to='/showUser'>
+            <Menu.Item
+              active={location.pathname === '/showUser'}
+              style={{padding:'1px 5px',}}
+            >
+              <Image style={{width:'35px', height: '35px'}} circular src={require('./images/photo.png')}/>
+              <p style={{ margin:'0 0 0 5px'}}>{user.nickname}</p>
+            </Menu.Item>
+          </Link>
+
+          <Link to='/login'>
+            <Menu.Item
+              name='logout'
+              onClick={() => {
+                handleLogout(this.props.history)
+              }}
+            />
+          </Link>
+        </>
       )
     } else {
       return (
-        <Menu.Menu position='right'>
+        <>
           <Link to='/login'>
             <Menu.Item
               id='login'
@@ -34,25 +48,33 @@ class Navbar extends React.Component {
               active={location.pathname === '/register'}
             />
           </Link>
-        </Menu.Menu>
+        </>
       )
     }
   }
-  
+
   render() {
     return (
-      <div>
-        <Menu pointing secondary>
-          <Link to='/'>
-            <Menu.Item
-              name='home'
-              id='home'
-              active={this.props.location.pathname === '/'}
+      <Menu className="large inverted pointing secondary" size='mini' style={{ backgroundColor: '#222' }}>
+        <Link to='/'>
+          <Menu.Item
+            name='MyZone'
+            id='home'
+            active={this.props.location.pathname === '/'}
+          />
+        </Link>
+        <Menu.Menu position='right'>
+          <Menu.Item>
+            <Input
+              size='mini'
+              icon={<Icon name='search' inverted circular link />}
+              placeholder='Search'
             />
-          </Link>
-            { this.rightNavItems() }
-        </Menu>
-      </div>
+          </Menu.Item>
+          {this.rightNavItems()}
+        </Menu.Menu>
+      </Menu>
+
     )
   }
 }
@@ -60,9 +82,9 @@ class Navbar extends React.Component {
 export class ConnectedNavbar extends React.Component {
   render() {
     return (
-      <AuthConsumer> 
-        { auth => 
-          <Navbar { ...this.props } auth={auth} />
+      <AuthConsumer>
+        {auth =>
+          <Navbar {...this.props} auth={auth} />
         }
       </AuthConsumer>
     )
