@@ -25,7 +25,7 @@ class Login extends React.Component {
   render() {
     const { email, password } = this.state
     return (
-      <Segment basic>
+      <Segment style={style.segment} >
         <Header as='h1' textAlign='center'>
           Login
         </Header>
@@ -71,5 +71,12 @@ export default class ConnectLogin extends React.Component {
         {auth => <Login {...this.props} auth={auth} />}
       </AuthConsumer>
     )
+  }
+}
+
+const style ={
+  segment: {
+    margin: '5% 20%',
+    
   }
 }
