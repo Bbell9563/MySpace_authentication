@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::PostsController < ApplicationController
-  before_action :authenticate_user
+  before_action :authenticate_user!
   def index
     render json: User.all_posts(current_user.liked_posts)
   end
