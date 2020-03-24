@@ -9,6 +9,8 @@ import Login from './components/Login'
 import Register from './components/Register';
 import FetchUser from './components/FetchUser'
 import ShowUser from './components/ShowUser'
+import ProtectedRoute from './components/ProtectedRoute'
+import './index.css'
 
 function App() {
   return (
@@ -17,7 +19,7 @@ function App() {
       <FetchUser>
         <Container>
           <Switch>
-            <Route exact path='/' component={Home} />
+            <ProtectedRoute exact path='/' component={Home} />
             <Route exact path='/login' component={Login} />
             <Route exact path='/register' component={Register} />
             <Route exact path='/showUser' component={ShowUser} />
