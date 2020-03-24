@@ -8,26 +8,34 @@ class Home extends React.Component {
   state = { posts: [] }
 
   componentDidMount() {
-    Axios.get('api/posts').then(res => this.setState({ posts: res.data })).catch(e=>console.log(e))
+    Axios.get(`api/users/1/posts`).then(res => this.setState({ posts: res.data })).catch(e => console.log(e))
+  }
+
+  getUser = (id) => {
+    Axios.get(`api/users/${id}`).then(res=>
+      console.log(res)).catch(e => console.log(e))
   }
 
   allPosts = () => {
     const { posts } = this.state
-    var postStuff = null
+    var postStuff = ''
     console.log(posts);
     if (posts.length > 0) {
-      posts.map((p, index) => {
+      postStuff = posts.map((p) => {
+        this.getUser(p.user_id)
         return(
-            postStuff = <p>{p.body}</p>
-        )
-      })
+        <Segment key={`post-${p.id}`}>
+          <p>{p.body}</p>
+          <p>{p.user_id}</p>
+        </Segment>
+      )})
     }
     else {
-      return(
-       postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
+      return (
+        postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
       )
     }
-    return(postStuff)
+    return (postStuff)
   }
 
   render() {
@@ -50,7 +58,7 @@ class Home extends React.Component {
           </Header>
         </Segment>
         <Segment>
-        {this.allPosts()}
+          {this.allPosts()}
         </Segment>
 
 
