@@ -1,9 +1,10 @@
 import React from 'react'
 import { AuthConsumer } from '../providers/AuthProvider'
-import { Image, Header, Item, Segment, Input } from 'semantic-ui-react'
+import { Header, Item, Segment, Input, Icon } from 'semantic-ui-react'
 import Axios from 'axios'
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
+import PostForm from './PostForm'
 
 class ShowUser extends React.Component {
   state = { allPost: [], userPost: [] }
@@ -88,17 +89,7 @@ class ShowUser extends React.Component {
             </Item>
           </Item.Group>
         </Segment>
-        <Segment style={{ margin: '0' }}>
-          <Header as='h3'>Create A Post</Header>
-          <div>
-            <div style={{ display: 'inline-block', width:'5%' }}>
-              <Avatar round size='35px' name={`${user.nickname}`} />
-            </div>
-            <div style={{ margin: '0', padding: '0 0 0 1%', display: 'inline-block',width:'95%'}}>
-              <Input placeholder='Write Your Post Here...' fluid/>
-            </div>
-          </div>
-        </Segment>
+        <PostForm user={user}/>
         <Segment>
           {this.getUsersPost()}
         </Segment>
@@ -116,16 +107,6 @@ export class ConnectedShowUser extends React.Component {
         }
       </AuthConsumer>
     )
-  }
-}
-
-const style = {
-  inputBox: {
-    width: '100%',
-  },
-  image: {
-    width: '6%',
-    margin: '2%'
   }
 }
 

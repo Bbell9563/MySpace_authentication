@@ -1,7 +1,7 @@
 import React from 'react'
 import { Header, Image, Input, Segment, Card, Container } from 'semantic-ui-react'
 import { AuthConsumer } from '../providers/AuthProvider'
-// import { Link } from 'react-router-dom'
+import PostForm from './PostForm'
 import Axios from 'axios'
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
@@ -47,23 +47,15 @@ class Home extends React.Component {
         )
       })
     } else { return (postStuff = <h2> No Post</h2>) }
-    return (postStuff)
+  return (postStuff)
   }
 
   render() {
     const { auth: { user } } = this.props
     return (
       <>
-        <Segment style={{ margin: '0' }}>
-          <Header as='h3'>Create A Post</Header>
-          <div>
-            <div style={{ display: 'inline-block', width:'5%' }}>
-              <Avatar round size='35px' name={`${user.nickname}`} />
-            </div>
-            <div style={{ margin: '0', padding: '0 0 0 1%', display: 'inline-block',width:'95%'}}>
-              <Input placeholder='Write Your Post Here...' fluid/>
-            </div>
-          </div>
+        <Segment>
+          <PostForm user={user}/>
         </Segment>
         <Segment>
           {this.allPosts()}
@@ -82,19 +74,6 @@ const ConnectedHome = (props) => {
     </AuthConsumer>
   )
 }
-
-const style = {
-  inputBox: {
-    padding: '0px',
-    width: '90%',
-    margin: '0 0 0 1%'
-  },
-  image: {
-    width: '6%',
-    margin: '2%'
-  }
-}
-
 
 function shuffleArray(array) {
   let i = array.length - 1;
