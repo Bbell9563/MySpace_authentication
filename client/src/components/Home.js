@@ -47,16 +47,14 @@ class Home extends React.Component {
         )
       })
     } else { return (postStuff = <h2> No Post</h2>) }
-  return (postStuff)
+    return (postStuff)
   }
 
   render() {
     const { auth: { user } } = this.props
     return (
       <>
-        <Segment>
-          <PostForm user={user}/>
-        </Segment>
+        <PostForm user={user} />
         <Segment>
           {this.allPosts()}
         </Segment>
