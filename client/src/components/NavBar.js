@@ -1,15 +1,8 @@
-<<<<<<< HEAD
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Menu, Input, Icon, Image } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
 import Avatar from 'react-avatar';
-=======
-import React from "react";
-import { AuthConsumer } from "../providers/AuthProvider";
-import { Menu, Input, Icon, Image } from "semantic-ui-react";
-import { Link, withRouter } from "react-router-dom";
->>>>>>> d4d77a0cd6f7963e2b7dc0f50315570fe5314ce4
 
 class Navbar extends React.Component {
   rightNavItems = () => {
@@ -26,17 +19,8 @@ class Navbar extends React.Component {
               active={location.pathname === "/showUser"}
               style={{ padding: "1px 5px" }}
             >
-<<<<<<< HEAD
               <Avatar round size='35px' name={`${user.nickname}`}/>
               <p style={{ margin:'0 0 0 5px'}}>{user.nickname}</p>
-=======
-              <Image
-                style={{ width: "35px", height: "35px" }}
-                circular
-                src={require("./images/photo.png")}
-              />
-              <p style={{ margin: "0 0 0 5px" }}>{user.nickname}</p>
->>>>>>> d4d77a0cd6f7963e2b7dc0f50315570fe5314ce4
             </Menu.Item>
           </Link>
 
