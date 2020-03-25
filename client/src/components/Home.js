@@ -25,25 +25,7 @@ class Home extends React.Component {
     )
   }
 
-  getPostUser = (id)=> {
-    console.log(id)
-    Axios.get(`/api/posts/getUser${id}`)
-      .then(res => {
-        console.log(res);
-        // return res.data
-        // res.data.filter((user)=>{
-        // return (id === user.id)
-
-        // })
-        // console.log(postCreator)
-        // return postCreator;
-      })
-      .catch(e => console.log(e));
-    
-  }
-
   allPosts = () => {
-    console.log(this.getPostUser(1))
     const { posts } = this.state
     var postStuff = ''
     if (posts.length > 0) {
