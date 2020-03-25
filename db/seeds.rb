@@ -20,7 +20,6 @@
     password: password, 
     password_confirmation: password,
     nickname: Faker::Internet.username,
-    image: './images/photo.png'
   )
   10.times do
     Post.create(
