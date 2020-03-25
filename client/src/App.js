@@ -27,7 +27,7 @@ function App() {
               <Route exact path='/showUser' component={ShowUser} />
               <Route exact path='/users/:id' component={ShowOtherUser} />
               <Route exact path='/EditPostForm/:user_id/:id' component={EditPostForm} />
-              <Route exact path='/friends' component={Friends}/>
+              <ProtectedRoute exact path='/friends' component={Friends}/>
               <Route component={NoMatch} />
             </Switch>
           </Container>
