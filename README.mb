@@ -15,3 +15,7 @@ Some current unresolved issues
     The error will (ironically) go away when refreshing the page. Im not sure why it does that
 
   -The search Bar does not do anything. Planned on figuring out how to make that work
+
+  -Friend Model is made but button and method needs to be made to add Friend
+
+  -Likes have not been made
