@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
   def index
     render json: User.all
@@ -7,9 +9,7 @@ class UsersController < ApplicationController
     render json: User.find(params[:id])
   end
 
-  def new
-  end
+  def new; end
 
-  def edit
-  end
+  def edit; end
 end

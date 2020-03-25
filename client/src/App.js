@@ -11,6 +11,7 @@ import FetchUser from './components/FetchUser'
 import ShowUser from './components/ShowUser'
 import ProtectedRoute from './components/ProtectedRoute'
 import ShowOtherUser from './components/ShowOtherUser'
+import Friends from './components/Friends'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route exact path='/register' component={Register} />
               <Route exact path='/showUser' component={ShowUser} />
               <Route exact path='/users/:id' component={ShowOtherUser} />
+              <Route exact path='/friends' component={Friends}/>
               <Route component={NoMatch} />
             </Switch>
           </Container>

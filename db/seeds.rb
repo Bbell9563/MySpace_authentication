@@ -14,9 +14,9 @@
   password = 'password'
   User.create!(
     email: "test#{@user_counter}@test.com", 
-    # name: Faker::Name.name,
-    # image: Faker::Avatar.image(slug: "my-own-slug", size: "50x50"),
-    # nickname: Faker::Name.first_name,
+    name: Faker::Name.name,
+    image: Faker::Avatar.image(slug: "my-own-slug", size: "50x50"),
+    nickname: Faker::Name.first_name,
     password: password, 
     password_confirmation: password,
     nickname: Faker::Internet.username,
