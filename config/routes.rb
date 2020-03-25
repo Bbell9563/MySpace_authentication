@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/users/api/posts' => 'api/posts#index'
 
   namespace :api do
-    resources :posts, only: %i[index update getUser create]
+    resources :posts, only: %i[index update getUser create destroy show]
     get 'my_posts', to: 'posts#my_posts'
     resources :friends, only: %i[index update]
   end

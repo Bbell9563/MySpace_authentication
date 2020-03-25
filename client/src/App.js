@@ -12,6 +12,7 @@ import ShowUser from './components/ShowUser'
 import ProtectedRoute from './components/ProtectedRoute'
 import ShowOtherUser from './components/ShowOtherUser'
 import Friends from './components/Friends'
+import EditPostForm from './components/EditPostForm'
 
 function App() {
   return (
@@ -20,11 +21,12 @@ function App() {
         <FetchUser>
           <Container>
             <Switch>
-              <Route exact path='/' component={Home} />
+              <ProtectedRoute exact path='/' component={Home} />
               <Route exact path='/login' component={Login} />
               <Route exact path='/register' component={Register} />
               <Route exact path='/showUser' component={ShowUser} />
               <Route exact path='/users/:id' component={ShowOtherUser} />
+              <Route exact path='/EditPostForm/:user_id/:id' component={EditPostForm} />
               <Route exact path='/friends' component={Friends}/>
               <Route component={NoMatch} />
             </Switch>

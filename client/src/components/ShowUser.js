@@ -1,21 +1,23 @@
 import React from 'react'
 import { AuthConsumer } from '../providers/AuthProvider'
-import { Header, Item, Segment, Input, Icon } from 'semantic-ui-react'
+import { Header, Item, Segment, Button } from 'semantic-ui-react'
 import Axios from 'axios'
 import Avatar from 'react-avatar';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import PostForm from './PostForm'
+import EditPostForm from './EditPostForm'
 
 class ShowUser extends React.Component {
   state = { allPost: [], userPost: [] }
+  deletePost = (id) => {
+    Axios.delete(`api/posts/${id}`).catch(e => console.log(e))
+  }
 
   getAllPost = () => {
     const { user_id } = this.state
     Axios.get(`api/posts`).then(res => {
       this.setState({ allPost: res.data })
-    })
-
-      .catch(e => console.log(e))
+    }).catch(e => console.log(e))
   }
 
   getUserPostNumber = (id) => {
@@ -54,16 +56,24 @@ class ShowUser extends React.Component {
                   </div>
                 </Link>
               </div>
-              <h4>{p.body}</h4>
+              <div style={{marginBottom:'3%', marginTop:'3%'}}>
+                <div style={{display:'inline-block' }}>
+                  <h4>{p.body}</h4>
+                </div>
+                <div style={{display:'inline-block', float:'right'}}>
+                  <Link to={`/EditPostForm/${user.id}/${p.id}`}>
+                  <Button inverted color="green" >Edit</Button>
+                  </Link>
+                  <Button inverted color="red" onClick={()=> {this.deletePost(p.id)}}>Delete</Button>
+                </div>
+              </div>
             </Segment>
           )
         }
       })
     }
     else {
-      return (
-        postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
-      )
+      return (postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>)
     }
     return postStuff
   }
@@ -89,7 +99,7 @@ class ShowUser extends React.Component {
             </Item>
           </Item.Group>
         </Segment>
-        <PostForm user={user}/>
+        <PostForm user={user} />
         <Segment>
           {this.getUsersPost()}
         </Segment>
