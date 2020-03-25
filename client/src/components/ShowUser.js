@@ -3,7 +3,7 @@ import { AuthConsumer } from '../providers/AuthProvider'
 import { Header, Item, Segment, Button } from 'semantic-ui-react'
 import Axios from 'axios'
 import Avatar from 'react-avatar';
-import { Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import PostForm from './PostForm'
 
 class ShowUser extends React.Component {
@@ -40,8 +40,12 @@ class ShowUser extends React.Component {
       return (<>{this.getAllPost()}</>)
     }
     else if (allPost.length !== 0) {
-      postStuff = allPost.map((p) => {
-        if (p.user_id === user.id) {
+      var newPostStuff = allPost.filter((p) => p.user_id === user.id)
+      if (newPostStuff.length === 0) {
+        return (postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>)
+      }
+      else {
+        postStuff = newPostStuff.map((p) => {
           return (
             <Segment key={`post-${p.id}`}>
               <div>
@@ -55,25 +59,26 @@ class ShowUser extends React.Component {
                   </div>
                 </Link>
               </div>
-              <div style={{marginBottom:'3%', marginTop:'3%'}}>
-                <div style={{display:'inline-block' }}>
+              <div style={{ marginBottom: '3%', marginTop: '3%' }}>
+                <div style={{ display: 'inline-block' }}>
                   <h4>{p.body}</h4>
                 </div>
-                <div style={{display:'inline-block', float:'right'}}>
+                <div style={{ display: 'inline-block', float: 'right' }}>
                   <Link to={`/EditPostForm/${user.id}/${p.id}`}>
-                  <Button inverted color="green" >Edit</Button>
+                    <Button inverted color="green" >Edit</Button>
                   </Link>
-                  <Button inverted color="red" onClick={()=> {this.deletePost(p.id)}}>Delete</Button>
+                  <Button inverted color="red" onClick={() => { this.deletePost(p.id) }}>Delete</Button>
                 </div>
               </div>
             </Segment>
           )
-        }
-      })
+        })
+      }
     }
     else {
       return (postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>)
     }
+    console.log(newPostStuff.length)
     return postStuff
   }
 
