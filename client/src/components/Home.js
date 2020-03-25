@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Image, Input, Segment, Card } from 'semantic-ui-react'
+import { Header, Image, Input, Segment, Card, Container } from 'semantic-ui-react'
 import { AuthConsumer } from '../providers/AuthProvider'
 // import { Link } from 'react-router-dom'
 import Axios from 'axios'
@@ -11,22 +11,19 @@ class Home extends React.Component {
 
   componentDidMount() {
     Axios.get(`api/posts`).then(res => this.setState({ posts: res.data })).catch(e => console.log(e))
-    Axios.get('/users')
-      .then(res => this.setState({ users: res.data })).catch(e => console.log(e))
+    Axios.get('/users').then(res => this.setState({ users: res.data })).catch(e => console.log(e))
   }
 
   getUser = (id) => {
     const { users } = this.state
-
     return (
-      users.filter(p =>
-        p.id === id
-      )
+      users.filter(p => p.id === id)
     )
   }
 
   allPosts = () => {
     const { posts } = this.state
+    var shA = shuffleArray(posts)
     var postStuff = ''
     if (posts.length > 0) {
       postStuff = posts.map((p) => {
@@ -34,51 +31,43 @@ class Home extends React.Component {
         var user = userArray[0]
         return (
           <Segment key={`post-${p.id}`}>
-            <Header as='h3'>
-              <Link to={`/users/${p.user_id}`}>
-                <Avatar round size='25px' name={`${user.nickname}`} style={{ margin: '0 1% 0 0' }} />
-                {user.nickname}
+            <div>
+              <Link to={`/users/${p.user_id}`} style={{ color: 'black' }}>
+                <div style={{ display: 'inline-block', verticalAlign: 'top' }}>
+                  <Avatar round size='35px' name={`${user.nickname}`} />
+                </div>
+                <div style={{ margin: '0', padding: '0 0 0 1%', display: 'inline-block' }}>
+                  <div style={{ fontSize: '15px', fontWeight: 'bold' }}>{user.nickname.charAt(0).toUpperCase()}{user.nickname.slice(1)} </div>
+                  <div style={{ color: '#999', fontSize: '12px' }}>{p.date}</div>
+                </div>
               </Link>
-            </Header>
-            <p>{p.body}</p>
+            </div>
+            <h4>{p.body}</h4>
           </Segment>
-
         )
       })
-    }
-    else {
-      return (
-        postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
-      )
-    }
+    } else { return (postStuff = <h2> No Post</h2>) }
     return (postStuff)
   }
 
   render() {
+    const { auth: { user } } = this.props
     return (
       <>
-        <Segment>
-          <Header as='h1'>Create A Post</Header>
-          <Header as='h3'>
-            <Image
-              size='mini'
-              circular
-              src={require('./images/photo.png')}
-              style={style.image}
-            />
-            <Input
-              placeholder='Write Your Post Here'
-              style={style.inputBox}
-            >
-            </Input>
-          </Header>
+        <Segment style={{ margin: '0' }}>
+          <Header as='h3'>Create A Post</Header>
+          <div>
+            <div style={{ display: 'inline-block', width:'5%' }}>
+              <Avatar round size='35px' name={`${user.nickname}`} />
+            </div>
+            <div style={{ margin: '0', padding: '0 0 0 1%', display: 'inline-block',width:'95%'}}>
+              <Input placeholder='Write Your Post Here...' fluid/>
+            </div>
+          </div>
         </Segment>
         <Segment>
           {this.allPosts()}
         </Segment>
-
-
-
       </>
     )
   }
@@ -97,12 +86,26 @@ const ConnectedHome = (props) => {
 const style = {
   inputBox: {
     padding: '0px',
-    width: '85%'
+    width: '90%',
+    margin: '0 0 0 1%'
   },
   image: {
     width: '6%',
     margin: '2%'
   }
 }
+
+
+function shuffleArray(array) {
+  let i = array.length - 1;
+  for (; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const temp = array[i];
+    array[i] = array[j];
+    array[j] = temp;
+  }
+  return array;
+}
+
 
 export default ConnectedHome

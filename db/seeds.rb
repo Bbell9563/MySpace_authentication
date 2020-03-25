@@ -25,7 +25,8 @@
   10.times do
     Post.create(
       body: Faker::Lorem.sentences(number: 1),
-      user_id: @user_counter
+      user_id: @user_counter,
+      date: Faker::Time.backward(days = 365, period = :all, format: :long)
     )
   end
   puts "username: test#{@user_counter}@test.com, password:#{password} created with 10 posts"

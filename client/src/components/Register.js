@@ -66,9 +66,9 @@ class Register extends Component {
           type="password"
           onChange={this.handleChange}
         />
-        <Segment textAlign='center'>
-          <Button primary type='submit'>Submit</Button>
-        </Segment>
+          <Segment basic style={{padding:'2% 0 2% 0'}}>
+            <Button primary inverted fluid>Submit</Button>
+          </Segment>
       </Form>
     </Segment>
   );

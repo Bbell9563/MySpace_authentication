@@ -1,6 +1,7 @@
 import React from 'react'
 import { AuthConsumer } from '../providers/AuthProvider'
 import { Button, Form, Segment, Header } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class Login extends React.Component {
   state = {
@@ -53,12 +54,14 @@ class Login extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
-
-          <Segment textAlign='center'>
-            <Button primary type='submit'>Submit</Button>
+          <Segment basic style={{padding:'2% 0 0 0'}}>
+            <Button primary inverted fluid>Submit</Button>
           </Segment>
 
         </Form>
+        <Segment basic compact>
+          <Link to='/register'>Don't have an account yet?</Link>
+        </Segment>
       </Segment>
     )
   }
@@ -74,9 +77,9 @@ export default class ConnectLogin extends React.Component {
   }
 }
 
-const style ={
+const style = {
   segment: {
     margin: '5% 20%',
-    
+
   }
 }

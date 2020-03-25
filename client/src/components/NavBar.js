@@ -2,6 +2,7 @@ import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
 import { Menu, Input, Icon, Image } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
+import Avatar from 'react-avatar';
 
 class Navbar extends React.Component {
 
@@ -16,7 +17,7 @@ class Navbar extends React.Component {
               active={location.pathname === '/showUser'}
               style={{padding:'1px 5px',}}
             >
-              <Image style={{width:'35px', height: '35px'}} circular src={require('./images/photo.png')}/>
+              <Avatar round size='35px' name={`${user.nickname}`}/>
               <p style={{ margin:'0 0 0 5px'}}>{user.nickname}</p>
             </Menu.Item>
           </Link>
@@ -55,7 +56,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <Menu className="large inverted pointing secondary" size='mini' style={{ backgroundColor: '#222' }}>
+      <Menu className="large inverted pointing secondary" size='large' style={{ backgroundColor: '#222' }}>
         <Link to='/'>
           <Menu.Item
             name='MyZone'
