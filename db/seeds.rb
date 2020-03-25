@@ -18,7 +18,9 @@
     # image: Faker::Avatar.image(slug: "my-own-slug", size: "50x50"),
     # nickname: Faker::Name.first_name,
     password: password, 
-    password_confirmation: password
+    password_confirmation: password,
+    nickname: Faker::Internet.username,
+    image: './images/photo.png'
   )
   10.times do
     Post.create(

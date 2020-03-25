@@ -2,6 +2,8 @@
 
 Rails.application.routes.draw do
   
+  resources :users
+  get '/users/api/posts' =>'api/posts#index'
 
   namespace :api do
     resources :posts, only: %i[index update]
