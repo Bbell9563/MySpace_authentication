@@ -4,10 +4,7 @@ import Avatar from 'react-avatar';
 import axios from 'axios';
 
 class PostForm extends React.Component {
-  defaultValues = {    
-    user_id: 0,
-    body: '',
-    date: ''}
+  defaultValues = {user_id: 0,body: '',date: ''}
   state = {...this.defaultValues}
 
   handleChange = e => {
@@ -25,7 +22,6 @@ class PostForm extends React.Component {
     e.preventDefault()
     axios.post("/api/posts", post).then(res => {
       this.setState({ ...this.defaultValues });
-
     }).catch( (err) => {
       console.log(err.response)
     })
@@ -59,7 +55,5 @@ class PostForm extends React.Component {
     )
   }
 }
-
-
 
 export default PostForm

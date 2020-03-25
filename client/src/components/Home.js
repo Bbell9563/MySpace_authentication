@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Image, Input, Segment, Card, Container } from 'semantic-ui-react'
+import {Segment} from 'semantic-ui-react'
 import { AuthConsumer } from '../providers/AuthProvider'
 import PostForm from './PostForm'
 import Axios from 'axios'
@@ -73,6 +73,7 @@ const ConnectedHome = (props) => {
   )
 }
 
+//Randomize the order of the array.
 function shuffleArray(array) {
   let i = array.length - 1;
   for (; i > 0; i--) {
@@ -83,6 +84,5 @@ function shuffleArray(array) {
   }
   return array;
 }
-
 
 export default ConnectedHome

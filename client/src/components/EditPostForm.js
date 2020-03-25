@@ -1,8 +1,6 @@
 import React from 'react'
 import { Header, Segment, Form, Button} from 'semantic-ui-react'
 import axios from 'axios'
-import Avatar from 'react-avatar';
-
 
 class EditPostForm extends React.Component {
   defaultValues = {    

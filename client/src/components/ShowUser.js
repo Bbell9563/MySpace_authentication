@@ -3,9 +3,8 @@ import { AuthConsumer } from '../providers/AuthProvider'
 import { Header, Item, Segment, Button } from 'semantic-ui-react'
 import Axios from 'axios'
 import Avatar from 'react-avatar';
-import { Link, Redirect } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import PostForm from './PostForm'
-import EditPostForm from './EditPostForm'
 
 class ShowUser extends React.Component {
   state = { allPost: [], userPost: [] }

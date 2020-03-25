@@ -1,8 +1,6 @@
 import React from "react";
-import { AuthConsumer } from "../providers/AuthProvider";
 import { Image, Header, Item, Segment, Input } from "semantic-ui-react";
 import Axios from "axios";
-
 import Avatar from 'react-avatar';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +19,6 @@ class ShowOtherUser extends React.Component {
   };
 
   getAllPost = () => {
-    const { user_id } = this.state
     Axios.get(`api/posts`).then(res => {
       this.setState({ allPost: res.data })
     })
@@ -30,7 +27,7 @@ class ShowOtherUser extends React.Component {
   }
 
   getUsersPost = () => {
-    const { allPost, userPost, user } = this.state
+    const { allPost,user } = this.state
     var postStuff = ''
     if (allPost.length === 0) {
       return (<>{this.getAllPost()}</>)
@@ -81,7 +78,7 @@ class ShowOtherUser extends React.Component {
   }
 
   render() {
-    const { user, user_id} = this.state
+    const { user} = this.state
     var userPostLength = this.getUserPostNumber()
     if (user !== null) {
       return (
@@ -113,17 +110,4 @@ class ShowOtherUser extends React.Component {
   }
 }
 
-
 export default ShowOtherUser
-
-
-const style = {
-  inputBox: {
-    padding: "0px",
-    width: "85%"
-  },
-  image: {
-    width: "6%",
-    margin: "2%"
-  }
-};

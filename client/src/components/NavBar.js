@@ -44,6 +44,7 @@ class Navbar extends React.Component {
               active={location.pathname === "/login"}
             />
           </Link>
+          
           <Link to="/register">
             <Menu.Item
               id="register"
@@ -66,13 +67,16 @@ class Navbar extends React.Component {
             active={this.props.location.pathname === "/"}
           />
         </Link>
+
         <Link to={`/friends`}>
           <Menu.Item
             name="Friends"
             active={this.props.location.pathname === `/friends`}
           />
         </Link>
+
         <Menu.Menu position="right">
+
           <Menu.Item>
             <Input
               size="mini"
@@ -82,6 +86,7 @@ class Navbar extends React.Component {
           </Menu.Item>
 
           {this.rightNavItems()}
+
         </Menu.Menu>
       </Menu>
     );

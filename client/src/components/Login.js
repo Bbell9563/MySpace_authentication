@@ -32,7 +32,6 @@ class Login extends React.Component {
         </Header>
 
         <Form onSubmit={this.handleSubmit}>
-
           <Form.Input
             required
             autoFocus
@@ -42,7 +41,6 @@ class Login extends React.Component {
             value={email}
             onChange={this.handleChange}
           />
-
 
           <Form.Input
             required
@@ -54,11 +52,12 @@ class Login extends React.Component {
             type='password'
             onChange={this.handleChange}
           />
+
           <Segment basic style={{padding:'2% 0 0 0'}}>
             <Button primary inverted fluid>Submit</Button>
           </Segment>
-
         </Form>
+
         <Segment basic compact>
           <Link to='/register'>Don't have an account yet?</Link>
         </Segment>
@@ -80,6 +79,5 @@ export default class ConnectLogin extends React.Component {
 const style = {
   segment: {
     margin: '5% 20%',
-
   }
 }
