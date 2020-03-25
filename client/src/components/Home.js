@@ -8,7 +8,7 @@ class Home extends React.Component {
   state = { posts: [] }
 
   componentDidMount() {
-    Axios.get(`api/users/1/posts`).then(res => this.setState({ posts: res.data })).catch(e => console.log(e))
+    Axios.get(`api/posts`).then(res => this.setState({ posts: res.data })).catch(e => console.log(e))
   }
 
   getUser = (id) => {
@@ -82,11 +82,6 @@ const style = {
   inputBox: {
     padding: '0px',
     width: '85%'
-  },
-  segments: {
-    backgroundColor: 'white',
-    margin: '.5% 2.5%',
-    width: '95%',
   },
   image: {
     width: '6%',
