@@ -3,12 +3,26 @@ import { Header, Image, Input, Segment, Card } from 'semantic-ui-react'
 import { AuthConsumer } from '../providers/AuthProvider'
 // import { Link } from 'react-router-dom'
 import Axios from 'axios'
+import Avatar from 'react-avatar';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
-  state = { posts: [], postCreator:{} }
+  state = { posts: [], users: [] }
 
   componentDidMount() {
-    Axios.get('api/posts').then(res => this.setState({ posts: res.data })).catch(e=>console.log(e))
+    Axios.get(`api/posts`).then(res => this.setState({ posts: res.data })).catch(e => console.log(e))
+    Axios.get('/users')
+      .then(res => this.setState({ users: res.data })).catch(e => console.log(e))
+  }
+
+  getUser = (id) => {
+    const { users } = this.state
+
+    return (
+      users.filter(p =>
+        p.id === id
+      )
+    )
   }
 
   getPostUser = (id)=> {
@@ -31,23 +45,31 @@ class Home extends React.Component {
   allPosts = () => {
     console.log(this.getPostUser(1))
     const { posts } = this.state
-    var postStuff = null
+    var postStuff = ''
     if (posts.length > 0) {
-      return postStuff = posts.map(p => (
-        <div key={p.id}>
-          {/* {console.log(p.user_id)} */}
-          {/* {console.log(this.getPostUser(p.user_id))} */}
-          {/* <Image src={this.getPostUser(p.user_id).image}/> */}
+      postStuff = posts.map((p) => {
+        var userArray = this.getUser(p.user_id)
+        var user = userArray[0]
+        return (
+          <Segment key={`post-${p.id}`}>
+            <Header as='h3'>
+              <Link to={`/users/${p.user_id}`}>
+                <Avatar round size='25px' name={`${user.nickname}`} style={{ margin: '0 1% 0 0' }} />
+                {user.nickname}
+              </Link>
+            </Header>
+            <p>{p.body}</p>
+          </Segment>
 
-          
-          <p>{p.body}</p>
-        </div>
-      ));} else {
-      return(
-       postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
+        )
+      })
+    }
+    else {
+      return (
+        postStuff = <Header as='h3' textAlign='center'> No Post Exist Yet</Header>
       )
     }
-    return postStuff
+    return (postStuff)
   }
 
   render() {
@@ -68,7 +90,12 @@ class Home extends React.Component {
             ></Input>
           </Header>
         </Segment>
-        <Segment>{this.allPosts()}</Segment>
+        <Segment>
+          {this.allPosts()}
+        </Segment>
+
+
+
       </>
     );
   }
@@ -88,11 +115,6 @@ const style = {
   inputBox: {
     padding: '0px',
     width: '85%'
-  },
-  segments: {
-    backgroundColor: 'white',
-    margin: '.5% 2.5%',
-    width: '95%',
   },
   image: {
     width: '6%',
